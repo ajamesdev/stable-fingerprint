@@ -1,0 +1,54 @@
+{
+	"name": "fingerprinter",
+	"version": "0.1.0",
+	"description": "Lightweight browser fingerprinting library that produces a stable visitor identifier and a confidence score.",
+	"type": "module",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"sideEffects": false,
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"demo": "vite demo",
+		"demo:build": "vite build demo",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"typecheck": "tsc --noEmit",
+		"lint": "eslint . --ext .ts,.tsx",
+		"format": "prettier --write ."
+	},
+	"keywords": [
+		"fingerprint",
+		"fingerprinting",
+		"browser",
+		"visitor-id",
+		"device-id",
+		"identification"
+	],
+	"license": "MIT",
+	"engines": {
+		"node": ">=18"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^7.16.0",
+		"@typescript-eslint/parser": "^7.16.0",
+		"eslint": "^8.57.0",
+		"jsdom": "^24.1.0",
+		"prettier": "^3.3.3",
+		"tsup": "^8.1.0",
+		"typescript": "^5.5.3",
+		"vite": "^5.3.3",
+		"vitest": "^1.6.0"
+	}
+}
