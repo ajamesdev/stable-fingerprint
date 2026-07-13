@@ -1,5 +1,8 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { collectComponents } from '../agent';
+import { isSuccess } from '../types';
+import { languages } from './languages';
+import { math } from './math';
 import { screen } from './screen';
 import { sources } from './index';
 
@@ -9,8 +12,9 @@ describe('source registry', () => {
 		expect(new Set(names).size).toBe(names.length);
 	});
 
-	it('marks every device/rendering source as stable for the id', () => {
-		expect(sources.every((s) => s.stableForId)).toBe(true);
+	it('only excludes user-toggleable signals from the id', () => {
+		const volatile = sources.filter((s) => !s.stableForId).map((s) => s.name);
+		expect(volatile).toEqual(['media']);
 	});
 
 	it('collects one component per source without throwing', async () => {
@@ -18,6 +22,28 @@ describe('source registry', () => {
 		// error — the point is that collection still returns one entry each.
 		const components = await collectComponents(sources);
 		expect(Object.keys(components).sort()).toEqual(sources.map((s) => s.name).sort());
+	});
+});
+
+describe('environment sources', () => {
+	it('reads the preferred languages', () => {
+		const value = languages() as { language: string; languages: string[] };
+		expect(typeof value.language).toBe('string');
+		expect(Array.isArray(value.languages)).toBe(true);
+	});
+
+	it('math ops are deterministic within an engine', () => {
+		expect(math()).toEqual(math());
+	});
+
+	it('every environment source resolves to a value in node/jsdom', async () => {
+		const names = ['timezone', 'languages', 'platform', 'hardware', 'plugins', 'math', 'media'];
+		const defs = sources.filter((s) => names.includes(s.name));
+		const components = await collectComponents(defs);
+		for (const name of names) {
+			const component = components[name];
+			expect(component && isSuccess(component)).toBe(true);
+		}
 	});
 });
 
