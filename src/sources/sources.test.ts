@@ -12,9 +12,9 @@ describe('source registry', () => {
 		expect(new Set(names).size).toBe(names.length);
 	});
 
-	it('only excludes user-toggleable signals from the id', () => {
+	it('only excludes user-toggleable / diagnostic signals from the id', () => {
 		const volatile = sources.filter((s) => !s.stableForId).map((s) => s.name);
-		expect(volatile).toEqual(['media']);
+		expect(volatile).toEqual(['media', 'incognito']);
 	});
 
 	it('collects one component per source without throwing', async () => {

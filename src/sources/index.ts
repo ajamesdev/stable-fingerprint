@@ -3,6 +3,7 @@ import { audio } from './audio';
 import { canvas } from './canvas';
 import { fonts } from './fonts';
 import { hardware } from './hardware';
+import { incognito } from './incognito';
 import { languages } from './languages';
 import { math } from './math';
 import { media } from './media';
@@ -27,5 +28,7 @@ export const sources: SourceDefinition[] = [
 	{ name: 'plugins', source: plugins, entropy: 3, stableForId: true },
 	{ name: 'math', source: math, entropy: 3, stableForId: true },
 	// user-toggleable (dark mode, reduced motion …) so reported but not in the id
-	{ name: 'media', source: media, entropy: 4, stableForId: false }
+	{ name: 'media', source: media, entropy: 4, stableForId: false },
+	// reported diagnostic only — never part of the id
+	{ name: 'incognito', source: incognito, entropy: 0, stableForId: false }
 ];
