@@ -1,7 +1,13 @@
 {
-	"name": "fingerprinter",
+	"name": "stable-fingerprint",
 	"version": "0.1.0",
 	"description": "Lightweight browser fingerprinting library that produces a stable visitor identifier and a confidence score.",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ajamesdev/stable-fingerprint.git"
+	},
+	"homepage": "https://github.com/ajamesdev/stable-fingerprint#readme",
+	"bugs": "https://github.com/ajamesdev/stable-fingerprint/issues",
 	"type": "module",
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",

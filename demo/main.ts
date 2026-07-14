@@ -1,4 +1,4 @@
-import Fingerprint, { isSuccess, sources, type FingerprintResult } from 'fingerprinter';
+import Fingerprint, { isSuccess, sources, type FingerprintResult } from 'stable-fingerprint';
 
 const resultEl = document.getElementById('result') as HTMLElement;
 const componentsSection = document.getElementById('components') as HTMLElement;
@@ -78,7 +78,7 @@ function renderComponents(result: FingerprintResult): void {
 			return `
 				<tr class="border-b border-neutral-100 align-top dark:border-neutral-800/70">
 					<td class="whitespace-nowrap p-3 font-mono ${ok ? '' : 'text-orange-500'}">${definition.name}</td>
-					<td class="break-words p-3 font-mono text-neutral-500 dark:text-neutral-400">${value}</td>
+					<td class="wrap-break-word p-3 font-mono text-neutral-500 dark:text-neutral-400">${value}</td>
 					<td class="p-3 text-right tabular-nums text-neutral-500">${component.duration}</td>
 				</tr>`;
 		})
@@ -103,7 +103,7 @@ async function main(): Promise<void> {
 		const result = await agent.get();
 		const elapsed = Math.round(performance.now() - start);
 
-		footerVersion.textContent = `fingerprinter v${result.version}`;
+		footerVersion.textContent = `stable-fingerprint v${result.version}`;
 		renderResult(result, elapsed);
 		renderComponents(result);
 	} catch (error) {

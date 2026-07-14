@@ -6,7 +6,7 @@
 		"moduleResolution": "Bundler",
 		"resolveJsonModule": true,
 		"paths": {
-			"fingerprinter": ["./src/index.ts"]
+			"stable-fingerprint": ["./src/index.ts"]
 		},
 		"strict": true,
 		"noUncheckedIndexedAccess": true,

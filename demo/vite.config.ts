@@ -9,5 +9,5 @@ export default defineConfig({
 	plugins: [tailwindcss()],
 	// serve the library source directly during development
 	server: { fs: { allow: [root] } },
-	resolve: { alias: { fingerprinter: entry } }
+	resolve: { alias: { 'stable-fingerprint': entry } }
 });
