@@ -10,7 +10,7 @@ describe('load / get', () => {
 		expect(result.visitorId).toMatch(/^[0-9a-f]{32}$/);
 		expect(result.confidence.score).toBeGreaterThanOrEqual(0);
 		expect(result.confidence.score).toBeLessThanOrEqual(1);
-		expect(result.version).toBe('0.1.0');
+		expect(result.version).toMatch(/^\d+\.\d+\.\d+$/);
 		expect(Object.keys(result.components).length).toBeGreaterThan(0);
 	});
 
