@@ -22,8 +22,9 @@ const { visitorId, confidence } = await fp.get();
 ```
 
 The id is the same in a normal window and an incognito window, survives browser
-zoom, and survives browser auto-updates. Run `npm run demo` to see it live, with
-a per-signal debug view.
+zoom, and survives browser auto-updates. Try the
+[live demo](https://ajamesdev.github.io/stable-fingerprint/), or run
+`npm run demo` locally for a per-signal debug view.
 
 ## Why it stays stable
 
