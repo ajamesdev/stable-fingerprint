@@ -1,7 +1,7 @@
 import type { SignalValue } from '../types';
 
 /** CSS media features reflecting OS/display preferences (reported, not in the id
- * — several of these are user-toggleable). */
+ * - several of these are user-toggleable). */
 export function media(): SignalValue {
 	const match = (query: string): boolean =>
 		typeof matchMedia === 'function' && matchMedia(query).matches;

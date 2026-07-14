@@ -4,8 +4,8 @@
  * MurmurHash3 is a non-cryptographic hash designed by Austin Appleby (public
  * domain). It is well suited to fingerprinting: fast, excellent distribution,
  * and strong avalanche behaviour so a one-bit change in the input scatters the
- * output. We do not need cryptographic resistance here — only a stable, well
- * distributed identifier — so a hashing primitive like this is the right tool
+ * output. We do not need cryptographic resistance here - only a stable, well
+ * distributed identifier - so a hashing primitive like this is the right tool
  * rather than SHA-family digests.
  *
  * This implementation uses BigInt for 64-bit modular arithmetic. It is slower

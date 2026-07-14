@@ -30,7 +30,7 @@ const TEST_STRING = 'mmmmmmmmmmlli';
 const TEST_SIZE = '72px';
 
 /** Installed-font detection: measure a string in each generic fallback, then as
- * `"<font>", <fallback>` — installed fonts shift the metrics, others don't. */
+ * `"<font>", <fallback>` - installed fonts shift the metrics, others don't. */
 export function fonts(): SignalValue {
 	const body = document.body;
 	if (!body) {

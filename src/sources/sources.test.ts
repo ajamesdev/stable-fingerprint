@@ -12,14 +12,27 @@ describe('source registry', () => {
 		expect(new Set(names).size).toBe(names.length);
 	});
 
-	it('only excludes user-toggleable / diagnostic signals from the id', () => {
-		const volatile = sources.filter((s) => !s.stableForId).map((s) => s.name);
-		expect(volatile).toEqual(['media', 'incognito']);
+	it('keeps randomized and diagnostic signals out of the id', () => {
+		const byRole = (role: string) => sources.filter((s) => s.role === role).map((s) => s.name);
+		// randomized/spoofed by privacy browsers (canvas/webgl/audio, and Firefox's
+		// hardwareConcurrency), so id-excluded
+		expect(byRole('volatile')).toEqual(['canvas', 'webgl', 'audio', 'hardware']);
+		expect(byRole('report')).toEqual(['media', 'incognito']);
+		// the id is built only from the randomization-proof core
+		expect(byRole('core')).toEqual([
+			'fonts',
+			'screen',
+			'timezone',
+			'languages',
+			'platform',
+			'plugins',
+			'math'
+		]);
 	});
 
 	it('collects one component per source without throwing', async () => {
 		// In jsdom, canvas/webgl/audio are unavailable, so several sources will
-		// error — the point is that collection still returns one entry each.
+		// error - the point is that collection still returns one entry each.
 		const components = await collectComponents(sources);
 		expect(Object.keys(components).sort()).toEqual(sources.map((s) => s.name).sort());
 	});

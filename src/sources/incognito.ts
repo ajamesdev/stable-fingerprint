@@ -1,8 +1,8 @@
 import type { SignalValue } from '../types';
 
 /** Best-effort private/incognito detection. This is inherently approximate and
- * browser/version specific, so we use the most reliable public signal — storage
- * quota, which Chromium and Firefox cap sharply in private mode — and report a
+ * browser/version specific, so we use the most reliable public signal - storage
+ * quota, which Chromium and Firefox cap sharply in private mode - and report a
  * nullable result rather than pretending certainty. Never feeds the id. */
 export async function incognito(): Promise<SignalValue> {
 	const storage = navigator.storage;

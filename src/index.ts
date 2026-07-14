@@ -18,13 +18,13 @@ export interface Agent {
 	get(): Promise<FingerprintResult>;
 }
 
-/** Build the hash input from the successful, id-relevant components, in
- * registry order. Volatile signals (storage, dark mode …) are excluded, which
- * is what keeps the id stable across incognito. */
+/** Build the hash input from the successful `core` components, in registry
+ * order. Volatile signals (canvas/WebGL/audio) and diagnostics are excluded,
+ * which is what keeps the id stable across incognito and privacy browsers. */
 function buildIdInput(components: Components, definitions: SourceDefinition[]): string {
 	const parts: string[] = [];
 	for (const definition of definitions) {
-		if (!definition.stableForId) {
+		if (definition.role !== 'core') {
 			continue;
 		}
 		const component = components[definition.name];
@@ -53,6 +53,8 @@ export function load(options: LoadOptions = {}): Promise<Agent> {
 }
 
 export { VERSION };
+export { sources } from './sources';
+export { isSuccess } from './types';
 export type {
 	FingerprintResult,
 	Components,

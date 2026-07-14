@@ -37,6 +37,16 @@ export function isSuccess(component: Component): component is ComponentSuccess {
 /** A function that collects a single signal. May be sync or async, and may throw. */
 export type Source<T extends SignalValue = SignalValue> = () => T | Promise<T>;
 
+/**
+ * How a signal is used:
+ * - `core`     stable and randomization-proof; feeds the visitor id and confidence.
+ * - `volatile` high entropy but randomized by privacy browsers (canvas, WebGL,
+ *              audio); boosts confidence but is excluded from the id, so the id
+ *              stays stable across incognito/private windows.
+ * - `report`   diagnostic only (e.g. media preferences, incognito guess).
+ */
+export type SourceRole = 'core' | 'volatile' | 'report';
+
 /** Registry entry describing a source and how it should be treated. */
 export interface SourceDefinition {
 	/** Stable, unique key used in the components map and as hash input. */
@@ -45,15 +55,11 @@ export interface SourceDefinition {
 	source: Source;
 	/**
 	 * Rough entropy this signal contributes, in bits. Used only for confidence
-	 * scoring — it is a heuristic, not a measured value.
+	 * scoring - it is a heuristic, not a measured value.
 	 */
 	entropy: number;
-	/**
-	 * Whether the signal is stable enough across sessions (and incognito) to be
-	 * part of the visitor id. Volatile signals (e.g. storage/incognito state)
-	 * are still reported but excluded from the hash.
-	 */
-	stableForId: boolean;
+	/** How the signal is used (see {@link SourceRole}). */
+	role: SourceRole;
 }
 
 /** Confidence that the visitor id correctly identifies a returning visitor. */

@@ -42,7 +42,7 @@ function describeError(error: unknown): string {
 /**
  * Run a single source safely: time it, enforce a timeout, and never throw.
  *
- * The result is always a {@link Component} — a success carrying the collected
+ * The result is always a {@link Component} - a success carrying the collected
  * value, or an error carrying the reason. This isolation is what lets the agent
  * collect dozens of signals concurrently without a single failure (a blocked
  * API, a browser that lacks a feature) aborting the whole fingerprint.

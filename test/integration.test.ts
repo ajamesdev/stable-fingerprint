@@ -25,24 +25,29 @@ describe('load / get', () => {
 		expect(typeof Fingerprint.load).toBe('function');
 	});
 
-	it('ignores volatile signals, so the id survives an incognito-style change', async () => {
+	it('keeps the id stable when a volatile signal is randomized (privacy browsers)', async () => {
 		let session = 0;
 		const defs: SourceDefinition[] = [
-			{ name: 'stable', source: () => 'device-hardware', entropy: 10, stableForId: true },
-			// stands in for a storage/session signal that incognito would reset
-			{
-				name: 'volatile',
-				source: () => `session-${session++}`,
-				entropy: 5,
-				stableForId: false
-			}
+			{ name: 'platform', source: () => 'device-hardware', entropy: 10, role: 'core' },
+			// stands in for canvas/WebGL/audio under Firefox private / Brave farbling
+			{ name: 'canvas', source: () => `noise-${session++}`, entropy: 10, role: 'volatile' }
 		];
 
 		const agent = await load({ sources: defs });
 		const first = await agent.get();
 		const second = await agent.get(); // the volatile value has now changed
 
-		expect(first.components['volatile']).not.toEqual(second.components['volatile']);
+		expect(first.components['canvas']).not.toEqual(second.components['canvas']);
 		expect(first.visitorId).toBe(second.visitorId);
+	});
+
+	it('changes the id when a core signal changes', async () => {
+		const make = (platform: string): SourceDefinition[] => [
+			{ name: 'platform', source: () => platform, entropy: 10, role: 'core' }
+		];
+
+		const a = await (await load({ sources: make('MacIntel') })).get();
+		const b = await (await load({ sources: make('Win32') })).get();
+		expect(a.visitorId).not.toBe(b.visitorId);
 	});
 });

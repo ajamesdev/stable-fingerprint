@@ -5,14 +5,14 @@ import { isSuccess, type SourceDefinition } from './types';
 describe('collectComponents', () => {
 	it('collects every source keyed by name, isolating failures', async () => {
 		const definitions: SourceDefinition[] = [
-			{ name: 'good', source: () => 1, entropy: 1, stableForId: true },
+			{ name: 'good', source: () => 1, entropy: 1, role: 'core' },
 			{
 				name: 'bad',
 				source: () => {
 					throw new Error('x');
 				},
 				entropy: 1,
-				stableForId: true
+				role: 'core'
 			}
 		];
 

@@ -8,7 +8,7 @@ import { safeRun } from './util/safeRun';
  * Sources run in parallel because they are independent and mostly I/O- or
  * device-bound; running them serially would needlessly add up their latencies.
  * Failures are contained by {@link safeRun}, so the returned map always has one
- * entry per definition — either a value or an error.
+ * entry per definition - either a value or an error.
  */
 export async function collectComponents(
 	definitions: SourceDefinition[],
