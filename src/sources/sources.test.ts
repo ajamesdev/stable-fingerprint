@@ -39,10 +39,9 @@ describe('source registry', () => {
 });
 
 describe('environment sources', () => {
-	it('reads the preferred languages', () => {
-		const value = languages() as { language: string; languages: string[] };
+	it('reads the preferred language', () => {
+		const value = languages() as { language: string };
 		expect(typeof value.language).toBe('string');
-		expect(Array.isArray(value.languages)).toBe(true);
 	});
 
 	it('math ops are deterministic within an engine', () => {

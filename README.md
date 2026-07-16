@@ -18,7 +18,7 @@ import Fingerprint from 'stable-fingerprint';
 const fp = await Fingerprint.load();
 const { visitorId, confidence } = await fp.get();
 // visitorId  -> "5d01727c86dcd5b7e4d6d6ecbd8b3382"
-// confidence -> { score: 0.99, comment: "high - rich, distinctive signal set" }
+// confidence -> { score: 0.99 }
 ```
 
 The id is the same in a normal window and an incognito window, survives browser
@@ -61,7 +61,7 @@ npm install stable-fingerprint
 ```ts
 interface FingerprintResult {
 	visitorId: string; // 32-char hex hash
-	confidence: { score: number; comment: string };
+	confidence: { score: number };
 	components: Record<string, { value; duration } | { error; duration }>;
 	version: string;
 }

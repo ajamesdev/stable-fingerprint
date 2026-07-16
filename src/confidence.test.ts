@@ -16,13 +16,11 @@ describe('scoreConfidence', () => {
 	it('caps at 0.99 when every scored signal is collected', () => {
 		const result = scoreConfidence({ canvas: ok(), webgl: ok(), screen: ok() }, defs);
 		expect(result.score).toBe(0.99);
-		expect(result.comment).toContain('high');
 	});
 
 	it('is zero when nothing was collected', () => {
 		const result = scoreConfidence({ canvas: bad(), webgl: bad(), screen: bad() }, defs);
 		expect(result.score).toBe(0);
-		expect(result.comment).toContain('low');
 	});
 
 	it('weights by entropy - losing canvas costs more than losing screen', () => {

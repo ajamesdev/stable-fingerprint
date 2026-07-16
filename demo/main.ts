@@ -17,6 +17,14 @@ function scoreHue(score: number): number {
 	return Math.round(score * 120);
 }
 
+/** Short explanation to accompany a score. */
+function describe(score: number): string {
+	if (score >= 0.9) return 'high - rich, distinctive signal set';
+	if (score >= 0.6) return 'good - most identifying signals available';
+	if (score >= 0.3) return 'moderate - several signals missing';
+	return 'low - very limited signal set';
+}
+
 function renderResult(result: FingerprintResult, elapsedMs: number): void {
 	const { visitorId, confidence } = result;
 	const percent = Math.round(confidence.score * 100);
@@ -52,7 +60,7 @@ function renderResult(result: FingerprintResult, elapsedMs: number): void {
 			<div class="h-2.5 overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800">
 				<div class="h-full rounded-full transition-[width] duration-500" style="width:${percent}%; background: ${colour}"></div>
 			</div>
-			<div class="mt-1.5 text-sm text-neutral-500 dark:text-neutral-400">${confidence.comment}</div>
+			<div class="mt-1.5 text-sm text-neutral-500 dark:text-neutral-400">${describe(confidence.score)}</div>
 		</div>
 		<div class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">${Object.keys(result.components).length} signals in ${elapsedMs} ms</div>
 	`;

@@ -66,8 +66,6 @@ export interface SourceDefinition {
 export interface Confidence {
 	/** 0..1, where 1 is highest confidence. */
 	score: number;
-	/** Human-readable explanation of the score. */
-	comment: string;
 }
 
 /** The full result returned by `get()`. */
