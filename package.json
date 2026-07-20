@@ -1,6 +1,6 @@
 {
 	"name": "stable-fingerprint",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"description": "Lightweight browser fingerprinting library that produces a stable visitor identifier and a confidence score.",
 	"repository": {
 		"type": "git",
