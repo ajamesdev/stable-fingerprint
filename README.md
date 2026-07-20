@@ -26,23 +26,6 @@ zoom, and survives browser auto-updates. Try the
 [live demo](https://ajamesdev.github.io/stable-fingerprint/), or run
 `npm run demo` locally for a per-signal debug view.
 
-## Why it stays stable
-
-Every signal has a role, and only the stable ones build the id:
-
-| Role       | Signals                                                     | In the id? |
-| ---------- | ----------------------------------------------------------- | ---------- |
-| `core`     | fonts, screen, timezone, languages, platform, plugins, math | yes        |
-| `volatile` | canvas, WebGL, audio, hardware                              | no         |
-| `report`   | media preferences, incognito guess                          | no         |
-
-Privacy browsers (Firefox private windows, Brave) inject random noise into
-canvas, WebGL and audio to defeat fingerprinting, and under-report CPU cores.
-Those are the `volatile` signals: they still feed the confidence score, but
-keeping them out of the id is exactly why it survives private mode. The UA is
-version-normalized and `devicePixelRatio` is dropped, so updates and zoom don't
-move the id either.
-
 ## Install
 
 ```sh

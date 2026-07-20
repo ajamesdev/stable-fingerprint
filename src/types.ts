@@ -43,7 +43,7 @@ export type Source<T extends SignalValue = SignalValue> = () => T | Promise<T>;
  * - `volatile` high entropy but randomized by privacy browsers (canvas, WebGL,
  *              audio); boosts confidence but is excluded from the id, so the id
  *              stays stable across incognito/private windows.
- * - `report`   diagnostic only (e.g. media preferences, incognito guess).
+ * - `report`   diagnostic only (e.g. media preferences).
  */
 export type SourceRole = 'core' | 'volatile' | 'report';
 

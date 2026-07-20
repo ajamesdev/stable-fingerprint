@@ -17,7 +17,7 @@ describe('source registry', () => {
 		// randomized/spoofed by privacy browsers (canvas/webgl/audio, and Firefox's
 		// hardwareConcurrency), so id-excluded
 		expect(byRole('volatile')).toEqual(['canvas', 'webgl', 'audio', 'hardware']);
-		expect(byRole('report')).toEqual(['media', 'incognito']);
+		expect(byRole('report')).toEqual(['media']);
 		// the id is built only from the randomization-proof core
 		expect(byRole('core')).toEqual([
 			'fonts',

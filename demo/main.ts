@@ -30,23 +30,10 @@ function renderResult(result: FingerprintResult, elapsedMs: number): void {
 	const percent = Math.round(confidence.score * 100);
 	const colour = `hsl(${scoreHue(confidence.score)} 70% 45%)`;
 
-	const incognitoComponent = result.components['incognito'];
-	const incognito =
-		incognitoComponent && isSuccess(incognitoComponent)
-			? (incognitoComponent.value as { incognito: boolean | null }).incognito
-			: null;
-	const badgeBase = 'rounded-full px-2 py-0.5 text-xs font-semibold';
-	const incognitoBadge =
-		incognito === true
-			? `<span class="${badgeBase} bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200">incognito detected</span>`
-			: incognito === false
-				? `<span class="${badgeBase} bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200">normal window</span>`
-				: '';
-
 	resultEl.removeAttribute('aria-busy');
 	resultEl.innerHTML = `
 		<div class="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-			Visitor ID ${incognitoBadge}
+			Visitor ID
 		</div>
 		<div class="mt-2 mb-6 flex items-center gap-3">
 			<code id="visitor-id" class="break-all font-mono text-xl font-semibold text-blue-600 sm:text-2xl dark:text-blue-400">${visitorId}</code>
